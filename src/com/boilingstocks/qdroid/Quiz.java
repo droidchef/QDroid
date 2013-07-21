@@ -8,22 +8,26 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.boilingstocks.qdroid.objects.JSONParser;
 import com.boilingstocks.qdroid.objects.Question;
 
+@SuppressLint("DefaultLocale")
 public class Quiz extends Activity implements OnClickListener{
 
 	public static String URL_QUESION_FETCH = "http://www.boilingstocks.com/qdroid/getques.php";
@@ -33,35 +37,102 @@ public class Quiz extends Activity implements OnClickListener{
 	 * UI Elements
 	 *
 	 */
-	private TextView question_text;
-	private RadioGroup options;
-	private Button submit, clear;
-	private RadioButton r1,r2,r3,r4;
+	private TextView question_text,tv_timer;
+	private Button clear;
+	private Button opt1,opt2,opt3,opt4;
 	private Question question;
 	JSONObject jsonObject = new JSONObject();
 	String[] choices = new String[4];
-
+	
+	private int questionCounter = 1;
+	List<NameValuePair> params = new ArrayList<NameValuePair>();
+    JSONParser jsonParser = new JSONParser();
+    private String LANGUAGE;
+    
+    private CountDownTimer mCountDownTimer;
+    private String CATEGORY;
+	@SuppressLint("DefaultLocale")
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		
 		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_quiz);
-		
+
+		SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(this);
+		LANGUAGE = p.getString("lang", "english");
+		LANGUAGE = LANGUAGE.toLowerCase();
+		Intent intent = getIntent();
+//		LANGUAGE = intent.getExtras().getString("lang");
+//		LANGUAGE = "english";
+		CATEGORY = intent.getExtras().getString("cat");
 		question_text = (TextView) findViewById(R.id.tv_question);
-		options = (RadioGroup) findViewById(R.id.rg_answer);
-		submit = (Button) findViewById(R.id.submit);
-		submit.setOnClickListener(this);
+		tv_timer = (TextView) findViewById(R.id.tv_timer);
 		clear = (Button) findViewById(R.id.clear);
+		clear.setOnClickListener(this);
+		opt1 = (Button) findViewById(R.id.bt_opt1);
+		opt2 = (Button) findViewById(R.id.bt_opt2);
+		opt3 = (Button) findViewById(R.id.bt_opt3);
+		opt4 = (Button) findViewById(R.id.bt_opt4);
 		
-		r1 = (RadioButton) findViewById(R.id.radioButton1);
-		r2 = (RadioButton) findViewById(R.id.radioButton2);
-		r3 = (RadioButton) findViewById(R.id.radioButton3);
-		r4 = (RadioButton) findViewById(R.id.radioButton4);
+		opt1.setOnClickListener(this);
+		opt2.setOnClickListener(this);
+		opt3.setOnClickListener(this);
+		opt4.setOnClickListener(this);
 		question = new Question();
-		final List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("id","1"));
 		
-		final JSONParser jsonParser = new JSONParser();
+		mCountDownTimer = new CountDownTimer(10000,1000){
+
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				Toast.makeText(Quiz.this, "Time Out", Toast.LENGTH_SHORT).show();
+				questionCounter++;
+				clear.setVisibility(View.VISIBLE);
+				opt1.setEnabled(false);
+				opt2.setEnabled(false);
+				opt3.setEnabled(false);
+				opt4.setEnabled(false);
+				}
+
+			@Override
+			public void onTick(long arg0) {
+				// TODO Auto-generated method stub
+				tv_timer.setText("00:"+arg0/1000);
+			}
+			
+		};
+		
+		getNewQuestion();
+		
+	}
+
+	public void checkAnswer(int answer){
+		
+		if(answer == question.getAnswerId()){
+			mCountDownTimer.cancel();
+			Toast.makeText(this, "Correct Answer!", Toast.LENGTH_SHORT).show();
+			questionCounter++;
+			getNewQuestion();
+			
+		}else{
+			mCountDownTimer.cancel();
+			Toast.makeText(this, "Wrong Answer!", Toast.LENGTH_SHORT).show();
+			questionCounter++;
+			opt1.setEnabled(false);
+			opt2.setEnabled(false);
+			opt3.setEnabled(false);
+			opt4.setEnabled(false);
+			clear.setVisibility(View.VISIBLE);
+		}
+	}
+	
+	public void getNewQuestion(){
+		opt1.setEnabled(true);
+		opt2.setEnabled(true);
+		opt3.setEnabled(true);
+		opt4.setEnabled(true);
+		clear.setVisibility(View.GONE);
 		new AsyncTask<Void,Void,Boolean>(){
 			ProgressDialog pDialog = new ProgressDialog(Quiz.this);
 
@@ -75,7 +146,14 @@ public class Quiz extends Activity implements OnClickListener{
 			
 			@Override
 			public Boolean doInBackground(Void...x){
+
+				
+//				String paramsList = "id="+questionCounter+"&cat="+"HISTORY"+"&lang="+LANGUAGE;
+				params.add(new BasicNameValuePair("id",String.valueOf(questionCounter)));
+				params.add(new BasicNameValuePair("cat",CATEGORY));
+				params.add(new BasicNameValuePair("lang",LANGUAGE));
 				jsonObject = jsonParser.makeHttpRequest(URL_QUESION_FETCH, "GET", params);
+				
 				int status=0;
 				try {
 					status = jsonObject.getInt("status");
@@ -101,6 +179,9 @@ public class Quiz extends Activity implements OnClickListener{
 				catch(Exception e){
 					e.printStackTrace();
 				}
+				}else{
+					Toast.makeText(Quiz.this, "There was some problem. Please Contact Support.", Toast.LENGTH_LONG).show();
+					
 				}
 				return true;
 			}
@@ -108,17 +189,9 @@ public class Quiz extends Activity implements OnClickListener{
 			@Override
 			protected void onPostExecute(Boolean b){
 				pDialog.dismiss();
+				mCountDownTimer.start();
 			}
 		}.execute();
-		
-		
-	}
-
-	public void checkAnswer(){
-		
-		if(options.getCheckedRadioButtonId()==options.getChildAt(question.getAnswerId()-1).getId()){
-			Toast.makeText(this, "Correct Answer!", Toast.LENGTH_SHORT).show();
-		}
 	}
 	
 	public void writeQuestion(){
@@ -128,10 +201,10 @@ public class Quiz extends Activity implements OnClickListener{
 			public void run() {
 				// TODO Auto-generated method stub
 				question_text.setText(question.getqText());
-				r1.setText(choices[0]);
-				r2.setText(choices[1]);
-				r3.setText(choices[2]);
-				r4.setText(choices[3]);
+				opt1.setText(choices[0]);
+				opt2.setText(choices[1]);
+				opt3.setText(choices[2]);
+				opt4.setText(choices[3]);
 			}
 		});
 	}
@@ -140,9 +213,20 @@ public class Quiz extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
-		case R.id.submit: checkAnswer();
-		break;
+		
+		case R.id.bt_opt1: checkAnswer(1);
+			break;
+		case R.id.bt_opt2: checkAnswer(2);
+			break;
+		case R.id.bt_opt3: checkAnswer(3);
+			break;
+		case R.id.bt_opt4: checkAnswer(4);
+			break;			
+		case R.id.clear:getNewQuestion();
+				break;
 		default: return;
 		}
+	
+	
 	}
 }

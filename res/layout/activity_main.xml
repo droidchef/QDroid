@@ -5,13 +5,44 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
+        android:id="@+id/bt_quiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="76dp"
-        android:text="Button" />
+        android:text="Start Quiz Mode" />
+
+    <Button
+        android:id="@+id/bt_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_quiz"
+        android:layout_centerHorizontal="true"
+        android:text="Main Menu" />
+
+    <Button
+        android:id="@+id/bt_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_main"
+        android:layout_centerHorizontal="true"
+        android:text="Settings" />
+
+    <Button
+        android:id="@+id/bt_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_settings"
+        android:layout_centerHorizontal="true"
+        android:text="Choose Language/Dialect" />
+
+    <Button
+        android:id="@+id/bt_facts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_language"
+        android:layout_centerHorizontal="true"
+        android:text="Start Fun Facts!" />
 
 </RelativeLayout>

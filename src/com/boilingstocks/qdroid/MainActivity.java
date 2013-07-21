@@ -2,6 +2,7 @@ package com.boilingstocks.qdroid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -13,15 +14,27 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_main);
 
-		Button b = (Button) findViewById(R.id.button1);
-		b.setOnClickListener(new OnClickListener() {
+		Button lang = (Button) findViewById(R.id.bt_language);
+		lang.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				startActivity(new Intent(MainActivity.this,Quiz.class));
+				startActivity(new Intent(MainActivity.this,LanguageMenu.class));
+
+			}
+		});
+		
+		Button quiz = (Button) findViewById(R.id.bt_quiz);
+		quiz.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(MainActivity.this,CategoryMenu.class));
 
 			}
 		});
@@ -33,7 +46,5 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
-
 
 }

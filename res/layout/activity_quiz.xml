@@ -11,55 +11,73 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="68dp"
         android:text="Question Here!"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-	<RadioGroup 
-	    android:id="@+id/rg_answer"
-	    android:layout_below="@+id/tv_question"
-	    android:gravity="center_horizontal"
-	    android:layout_centerHorizontal="true"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content">
-    <RadioButton
-        android:id="@+id/radioButton1"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tv_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RadioButton" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Large Text"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <RadioButton
-        android:id="@+id/radioButton2"
+    <Button
+        android:id="@+id/clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RadioButton" />
+        android:layout_below="@+id/tableLayout1"
+        android:layout_centerHorizontal="true"
+        android:text="Skip"
+        android:visibility="gone" />
 
-    <RadioButton
-        android:id="@+id/radioButton3"
+    <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RadioButton" />
+        android:layout_below="@+id/tv_question"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp" >
 
-    <RadioButton
-        android:id="@+id/radioButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RadioButton" />
-	</RadioGroup>
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
-	<Button
-	    android:id="@+id/submit"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/rg_answer"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginTop="32dp"
-	    android:text="Submit" />
+            <Button
+                android:id="@+id/bt_opt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
 
-	<Button
-	    android:id="@+id/clear"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/submit"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginTop="36dp"
-	    android:text="Clear" />
+            <Button
+                android:id="@+id/bt_opt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/bt_opt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/bt_opt4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>

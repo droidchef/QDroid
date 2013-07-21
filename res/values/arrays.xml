@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="languages">
+        
+        <item name="englsih">English</item>
+        <item name="kurmanji">Kurmanji</item>
+        <item name="sorani">Sorani</item>
+        <item name="bahdini">Bahdini</item>
+        
+    </string-array>
+</resources>
