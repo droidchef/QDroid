@@ -28,6 +28,7 @@
             android:configChanges="orientation"></activity>
         <activity android:name="LanguageMenu"></activity>
         <activity android:name="CategoryMenu"></activity>
+        <activity android:name="Facts"></activity>
     </application>
 
 </manifest>

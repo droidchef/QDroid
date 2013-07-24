@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_main);
 
-		Button lang = (Button) findViewById(R.id.bt_language);
+		Button lang = (Button) findViewById(R.id.bt_settings);
 		lang.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		Button quiz = (Button) findViewById(R.id.bt_quiz);
+		Button quiz = (Button) findViewById(R.id.bt_quizmode);
 		quiz.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -37,6 +37,16 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				startActivity(new Intent(MainActivity.this,CategoryMenu.class));
 
+			}
+		});
+		
+		Button facts = (Button) findViewById(R.id.bt_factsmode);
+		facts.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(MainActivity.this,Facts.class));
 			}
 		});
 	}

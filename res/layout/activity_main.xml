@@ -2,47 +2,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:background="@drawable/bg" >
 
-    <Button
-        android:id="@+id/bt_quiz"
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="76dp"
-        android:text="Start Quiz Mode" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="108dp"
+        android:src="@drawable/shelf" />
 
     <Button
-        android:id="@+id/bt_main"
+        android:id="@+id/bt_factsmode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_quiz"
-        android:layout_centerHorizontal="true"
-        android:text="Main Menu" />
+        android:layout_alignBottom="@+id/bt_quizmode"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/bt_quizmode"
+        android:background="@drawable/funfacts" />
 
     <Button
         android:id="@+id/bt_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_main"
-        android:layout_centerHorizontal="true"
-        android:text="Settings" />
+        android:layout_alignBottom="@+id/bt_factsmode"
+        android:layout_toRightOf="@+id/bt_factsmode"
+        android:background="@drawable/support" />
 
     <Button
-        android:id="@+id/bt_language"
+        android:id="@+id/bt_quizmode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_settings"
-        android:layout_centerHorizontal="true"
-        android:text="Choose Language/Dialect" />
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="39dp"
+        android:layout_marginLeft="35dp"
+        android:background="@drawable/quiz" />
 
-    <Button
-        android:id="@+id/bt_facts"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_language"
-        android:layout_centerHorizontal="true"
-        android:text="Start Fun Facts!" />
+        android:layout_alignBottom="@+id/bt_settings"
+        android:layout_toRightOf="@+id/bt_settings"
+        android:src="@drawable/man" />
 
 </RelativeLayout>
