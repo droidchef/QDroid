@@ -6,6 +6,44 @@
         <item name="kurmanji">Kurmanji</item>
         <item name="sorani">Sorani</item>
         <item name="bahdini">Bahdini</item>
-        
     </string-array>
+    
+    <string-array name="english">
+        <item name="cat1">History</item>
+        <item name="cat2">Geography</item>
+        <item name="cat3">Science</item>
+        <item name="cat4">Entertainment</item>
+        <item name="cat5">Random</item>
+    </string-array>
+    
+    <string-array name="bahdini">
+        <item name="cat1">Mêjû</item>
+        <item name="cat2">Zanist</item>
+        <item name="cat3">Cografya</item>
+        <item name="cat4">Kêf</item>
+        <item name="cat5">Têkel</item>
+    </string-array>
+
+    <string-array name="kurmanji">
+        <item name="cat1">Mêjû</item>
+        <item name="cat2">Zanist</item>
+        <item name="cat3">Cografya</item>
+        <item name="cat4">Kêf</item>
+        <item name="cat5">Têkel</item>
+    </string-array>
+    
+    <string-array name="sorani">
+        <item name="cat1">Mêjû</item>
+        <item name="cat2">Zanist</item>
+        <item name="cat3">Cografî</item>
+        <item name="cat4">Kêf</item>
+        <item name="cat5">Têkel</item>
+    </string-array>
+    
+
+
+
+
+
+
 </resources>

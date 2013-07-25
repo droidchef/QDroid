@@ -10,9 +10,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,11 +34,18 @@ public class Facts extends Activity implements OnClickListener {
 	int factcounter;
 	long seed;
 	Random r;
+	String LANGUAGE;
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		setContentView(R.layout.activity_facts);
-		
+		SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(this);
+		LANGUAGE = p.getString("lang", "english");
+		LANGUAGE = LANGUAGE.toLowerCase();
 		fact = (TextView) findViewById(R.id.tv_fact);
 		next = (Button) findViewById(R.id.bt_next);
 		next.setOnClickListener(this);
@@ -51,7 +63,7 @@ public class Facts extends Activity implements OnClickListener {
 			public Void doInBackground(Void...p){
 			
 				params.add(new BasicNameValuePair("id",String.valueOf(factcounter)));
-				params.add(new BasicNameValuePair("lang","english"));
+				params.add(new BasicNameValuePair("lang",LANGUAGE));
 				
 				JSONParser jsonParser = new JSONParser();
 				JSONObject jsonObject = jsonParser.makeHttpRequest(URL_GET_FACT, "GET", params);

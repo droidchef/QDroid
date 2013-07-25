@@ -2,8 +2,10 @@ package com.boilingstocks.qdroid;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +15,7 @@ public class CategoryMenu extends Activity implements OnClickListener{
 
 	private Button his, ent, spo, sci,ran;
 	Intent intent;
+	String LANGUAGE;
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -20,6 +23,9 @@ public class CategoryMenu extends Activity implements OnClickListener{
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.actiivty_category);
+		SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(this);
+		LANGUAGE = p.getString("lang", "english");
+		LANGUAGE = LANGUAGE.toLowerCase();
 		
 		his = (Button) findViewById(R.id.cat1);
 		ent = (Button) findViewById(R.id.cat4);
@@ -33,6 +39,10 @@ public class CategoryMenu extends Activity implements OnClickListener{
 		sci.setOnClickListener(this);
 		ran.setOnClickListener(this);
 		intent = new Intent(CategoryMenu.this,QuizMode.class);
+		
+	}
+	
+	public void changeText(){
 		
 	}
 
