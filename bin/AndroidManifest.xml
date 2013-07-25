@@ -24,11 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Quiz"
-            android:configChanges="orientation"></activity>
         <activity android:name="LanguageMenu"></activity>
         <activity android:name="CategoryMenu"></activity>
         <activity android:name="Facts"></activity>
+        <activity android:name="QuizMode"></activity>
     </application>
 
 </manifest>
