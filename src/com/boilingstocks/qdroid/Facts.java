@@ -26,7 +26,7 @@ import com.boilingstocks.qdroid.objects.JSONParser;
 
 public class Facts extends Activity implements OnClickListener {
 
-	public static String URL_GET_FACT = "http://www.boilingstocks.com/qdroid/getfacts.php"; 
+	public static String URL_GET_FACT = "http://www.zanyari.org/zanyari/getfacts.php"; 
 	TextView fact ;
 	Button next;
 	String fact_text;
@@ -50,7 +50,7 @@ public class Facts extends Activity implements OnClickListener {
 		next = (Button) findViewById(R.id.bt_next);
 		next.setOnClickListener(this);
 		r = new Random();		
-		factcounter = 1 + r.nextInt(3);
+		factcounter = 1 + r.nextInt(100); //Change this number equal to the number of facts.
 		
 	
 	}

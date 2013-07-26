@@ -20,10 +20,7 @@ public class CategoryMenu extends Activity implements OnClickListener{
 	Intent intent;
 	int id;
 	String LANGUAGE;
-	String[] menukur = new String[5];
-	String[] menueng = new String[5];
-	String[] menusor = new String[5];
-	String[] menubah = new String[5];
+
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -41,10 +38,6 @@ public class CategoryMenu extends Activity implements OnClickListener{
 		sci = (Button) findViewById(R.id.cat3);
 		ran = (Button) findViewById(R.id.cat5);
 
-		menueng = getResources().getStringArray(R.array.english);
-		menubah = getResources().getStringArray(R.array.bahdini);
-		menukur = getResources().getStringArray(R.array.kurmanji);
-		menusor = getResources().getStringArray(R.array.sorani);
 
 		
 		his.setOnClickListener(this);
@@ -71,7 +64,7 @@ public class CategoryMenu extends Activity implements OnClickListener{
 			@Override
 			protected void onPreExecute(){
 				pDialog.setTitle("Please Wait...");
-				pDialog.setMessage("Loading Question");
+				pDialog.setMessage("Changing Language");
 				pDialog.setIndeterminate(true);
 				pDialog.show();
 			}
@@ -101,7 +94,7 @@ public class CategoryMenu extends Activity implements OnClickListener{
 					
 				}
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(500);
 					changeButtonTexts();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block

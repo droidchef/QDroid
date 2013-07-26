@@ -31,7 +31,7 @@ public class QuizMode extends Activity implements OnClickListener{
 	
 	Button[] options;
 	Button nextques;
-	public static String URL_QUESION_FETCH = "http://www.boilingstocks.com/qdroid/getques.php";
+	public static String URL_QUESION_FETCH = "http://www.zanyari.org/zanyari/getques.php";
 	
 	/*
 	 * 

@@ -32,14 +32,20 @@ public final class R {
         public static final int bgq=0x7f020001;
         public static final int booksupport=0x7f020002;
         public static final int fun_facts_all=0x7f020003;
-        public static final int funfacts=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int man=0x7f020006;
-        public static final int quiz=0x7f020007;
-        public static final int settings=0x7f020008;
-        public static final int shelf=0x7f020009;
-        public static final int support=0x7f02000a;
-        public static final int zanyari=0x7f02000b;
+        public static final int fun_rest=0x7f020004;
+        public static final int funfacts=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int man=0x7f020007;
+        public static final int quiz=0x7f020008;
+        public static final int quiz_kur=0x7f020009;
+        public static final int quiz_sor=0x7f02000a;
+        public static final int settings=0x7f02000b;
+        public static final int shelf=0x7f02000c;
+        public static final int sup_bah=0x7f02000d;
+        public static final int sup_kur=0x7f02000e;
+        public static final int sup_sor=0x7f02000f;
+        public static final int support=0x7f020010;
+        public static final int zanyari=0x7f020011;
     }
     public static final class id {
         public static final int Buttons=0x7f0a0019;
