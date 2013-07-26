@@ -18,9 +18,12 @@ public class CategoryMenu extends Activity implements OnClickListener{
 
 	private Button his, ent, spo, sci,ran;
 	Intent intent;
+	int id;
 	String LANGUAGE;
-	String[] menu = new String[5];
-
+	String[] menukur = new String[5];
+	String[] menueng = new String[5];
+	String[] menusor = new String[5];
+	String[] menubah = new String[5];
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -37,9 +40,32 @@ public class CategoryMenu extends Activity implements OnClickListener{
 		spo = (Button) findViewById(R.id.cat2);
 		sci = (Button) findViewById(R.id.cat3);
 		ran = (Button) findViewById(R.id.cat5);
-		
 
-		new AsyncTask<Void,Void,Boolean>(){
+		menueng = getResources().getStringArray(R.array.english);
+		menubah = getResources().getStringArray(R.array.bahdini);
+		menukur = getResources().getStringArray(R.array.kurmanji);
+		menusor = getResources().getStringArray(R.array.sorani);
+
+		
+		his.setOnClickListener(this);
+		ent.setOnClickListener(this);
+		spo.setOnClickListener(this);
+		sci.setOnClickListener(this);
+		ran.setOnClickListener(this);
+		intent = new Intent(CategoryMenu.this,QuizMode.class);
+		
+	}
+	
+
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(CategoryMenu.this);
+		LANGUAGE = p.getString("lang", "english");
+		LANGUAGE = LANGUAGE.toLowerCase();
+		Log.i("QDROID",LANGUAGE);
+		new AsyncTask<String,Void,Boolean>(){
 			ProgressDialog pDialog = new ProgressDialog(CategoryMenu.this);
 
 			@Override
@@ -50,57 +76,91 @@ public class CategoryMenu extends Activity implements OnClickListener{
 				pDialog.show();
 			}
 			@Override
-			protected Boolean doInBackground(Void... arg0) {
+			protected Boolean doInBackground(String... pa) {
 				// TODO Auto-generated method stub
-				if(LANGUAGE=="english")
+				String LAN = pa[0];
+				Log.i("QDROID","LAN = "+LAN);
+				if(LAN.equalsIgnoreCase("english"))
 				{
-					menu = getResources().getStringArray(R.array.english);
-				}else if(LANGUAGE=="bahdini"){
-					menu = getResources().getStringArray(R.array.bahdini);
-    			}else if(LANGUAGE == "kurmanji"){
-					menu = getResources().getStringArray(R.array.kurmanji);
+					Log.i("QDROID", LANGUAGE);
+					id=1;
+				}else if(LAN.equalsIgnoreCase("bahdini")){
+					Log.i("QDROID", LANGUAGE);
+
+					id=2;
+				}else if(LAN.equalsIgnoreCase("kurmanji")){
+					Log.i("QDROID", LANGUAGE);
+
+					id=3;
+				}else if(LAN.equalsIgnoreCase("sorani")){
+					Log.i("QDROID", LANGUAGE);
+
+					id=4;
 				}else{
-					menu = getResources().getStringArray(R.array.sorani);
+					//nothing to do
+					
 				}
-				changeButtonTexts(menu);
+				try {
+					Thread.sleep(2000);
+					changeButtonTexts();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return true;
 			}
 			@Override
 			protected void onPostExecute(Boolean b){
 				pDialog.dismiss();
 			}
-		}.execute();
-		
+		}.execute(LANGUAGE);
 
-		his.setOnClickListener(this);
-		ent.setOnClickListener(this);
-		spo.setOnClickListener(this);
-		sci.setOnClickListener(this);
-		ran.setOnClickListener(this);
-		intent = new Intent(CategoryMenu.this,QuizMode.class);
-		
 	}
 	
-	public void changeButtonTexts(String[] m){
+	public void changeButtonTexts(){
+		
 		runOnUiThread(new Runnable() {
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				menu = getResources().getStringArray(R.array.sorani);
-				for(String m:menu){
-					Log.d("QDROID","Strings menu -> " + m);
+				switch(id){
+				case 1 : his.setText("History");
+				spo.setText("Geography");
+				sci.setText("Science");
+				ent.setText("Entertainment");
+				ran.setText("Random");
+				Log.i("QDROID", "CAse1");
+				break;
+				case 2 : his.setText("Mêjû");
+				spo.setText("Zanist");
+				sci.setText("Cografya");
+				ent.setText("Kêf");
+				ran.setText("Têkel");
+				Log.i("QDROID", "CAse2");
+				break;
+				case 3 : his.setText("Mêjû");
+				spo.setText("Zanist");
+				sci.setText("Cografya");
+				ent.setText("Kêf");
+				ran.setText("Têkel");
+				Log.i("QDROID", "CAse3");
+				break;
+				case 4 : his.setText("Mêjû");
+				spo.setText("Zanist");
+				sci.setText("Cografî");
+				ent.setText("Kêf");
+				ran.setText("Têkel");
+				Log.i("QDROID", "CAse4");
+				break;
+				default : 
+					break;
 				}
-				his.setText(menu[0]);
-				spo.setText(menu[1]);
-				sci.setText(menu[2]);
-				ent.setText(menu[3]);
-				ran.setText(menu[4]);
+
 
 			}
 		});
 	}
-	
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
